@@ -5,8 +5,8 @@ public class PayBean {
 	// Bean 클래스라면 멤버필드 + 멤버메소드 
 
 	private String name; //  멤버필드 변수는 초기화를 하지 않는다.
-	private int salary,tax,money;
-
+	private int salary;
+	//
 	public void setName(String name) {
 		this.name = name;
 	}
