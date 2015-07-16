@@ -43,6 +43,7 @@ public String getWinner() {
 	//제일 먼저 리턴타입을 카피
 	String winner="";
 	if (this.num > this.num2) {
+		
 		winner = name + "승리";
 		
 	} else if(this.num2>this.num){
