@@ -23,31 +23,33 @@ public class Bankmain {
 		 잔액 : 1000원
 		 * */
 		
-		String bank = "", name = "";
-		int bankbookNo = 0, money=0, pass=0;
+		
 		Scanner scanner = new Scanner(System.in);
-		BankBook.bankbook= new BankBook();
-		System.out.println("은행이름은 : ?");
-		bank = scanner.nextLine();
-		System.out.println("통장번호는 : ?");
-		bankbookNo = scanner.nextInt();
-		System.out.println("소유자 이름은 : ?");
-		name = scanner.next();
-		System.out.println("입근 돈은 : ?");
-		money = scanner.nextInt();
-		System.out.println("비밀번호는 : ?");
-		pass = scanner.nextInt();
+		/*
+		 생성자가 가지는 기능
+		 1. 객체를 만드는 기능
+		 2. setter 기능 
+		 3. 객체가 만들어지는 데 필수적인 요소가 주어지지 않으면 아예 생성을 막는 기능 ==>제약, 방어코딩
+		 * */
 		
 		
+		System.out.println("통장주 이름 :");
+		BankBook bankbook= new BankBook(scanner.next());
+		
+		System.out.println("입금 : ");
+		bankbook.deposit(scanner.nextInt());
+		
+		System.out.println("출금 : ");//누적된 값에서 마이너스 
+		bankbook.withdraw(scanner.nextInt());
+		
+		System.out.println("입금 : ");
+		bankbook.deposit(scanner.nextInt());
 		
 		
 		
 		System.out.println(bankbook.toString());
 		
 		
-		
-		
-		
-	}
+		}
 
 }

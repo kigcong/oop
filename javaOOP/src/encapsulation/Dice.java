@@ -14,22 +14,10 @@ public Dice(){
 } 
 
 	
-	
-	
-
 /*===== MemberMethod =====*/
-
 public int getNum() {    // 맨 위에 필드에있는 num을 가르킴
 	return num;
 }
-
-
-
-
-
-
-
-
 
 }
 

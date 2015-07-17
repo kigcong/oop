@@ -21,7 +21,7 @@ public class CardBean {
 	public CardBean(String name) {//파라미터 생성자
 		//setter 역활을 겸용하는 생성자
 	this.name = name;
-	this.num = (int) ((Math.random()*13)+1);
+	
 }
 	//디폴트 생성자는 개발자가 직접 만들지 않아도 
 	//프로그램 내부에서는 생성되 있는 것으로 인식한다.
