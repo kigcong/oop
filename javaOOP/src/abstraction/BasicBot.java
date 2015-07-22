@@ -8,7 +8,7 @@ public class BasicBot implements Robot{
 	@Override
 	public void charge (int energy) {
 		
-		this.energy += energy;
+		this.energy +=energy;
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class BasicBot implements Robot{
 	public void status() {
 		
 		System.out.println("로봇속도 : " + this.speed);
-		System.out.println("로봇 에너지"+ this.energy);
+		System.out.println("로봇 에너지 :" + this.energy);
 	}
 	
 	

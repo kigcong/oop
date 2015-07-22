@@ -9,10 +9,7 @@ public class Gunrobot extends BasicBot {
 	 * 에너지는 20, 방어력 50 - 방어력은 인스턴스 변수로 int shieldPoint
 	 */
 
-	public int getAttack() {
-		return attack;
-	}
-
+	
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
@@ -22,6 +19,8 @@ public class Gunrobot extends BasicBot {
 		super.status();
 		System.out.println("로봇 공격력 : " + this.attack);
 
+		
+		
 	}
 
 }
