@@ -4,31 +4,46 @@ import java.util.Scanner;
 
 public class KBbank {
 	public static void main(String[] args) {
-	BankRole bank = new Bank(100); //ì¸í„°í˜ì´ìŠ¤íƒ€ì… ì¸ìŠ¤í„´ìŠ¤ = new ìƒì„±ì();
+	BankRole bank = new Bank(100); //ÀÎÅÍÆäÀÌ½ºÅ¸ÀÔ ÀÎ½ºÅÏ½º = new »ı¼ºÀÚ();
 	Scanner scanner = new Scanner(System.in);
 	
-	System.out.println("ê³ ê°ë‹˜ ì„±í•¨ ?");
+	System.out.println("°í°´´Ô ¼ºÇÔ ?");
 	String name = scanner.next();
-	System.out.println("ë¹„ë°€ë²ˆí˜¸ 4ìë¦¬ ì…ë ¥ ?");
+	System.out.println("ºñ¹Ğ¹øÈ£ 4ÀÚ¸® ÀÔ·Â ?");
 	int password = scanner.nextInt();
-	System.out.println("ì–¼ë§ˆë¥¼ ì…ê¸ˆí•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+	System.out.println("¾ó¸¶¸¦ ÀÔ±İÇÏ½Ã°Ú½À´Ï±î?");
 	int money = scanner.nextInt();
 	bank.openAccount( name, password, money);
 	
-	System.out.println("====ê³„ì¢Œë²ˆí˜¸ ì¡°íšŒ(ê³„ì¢Œë²ˆí˜¸) ====");
-	System.out.println("ê²€ìƒ‰í•˜ë ¤ëŠ” ê³ ê°ëª…?");
+	System.out.println("====°èÁÂ¹øÈ£ Á¶È¸(°èÁÂ¹øÈ£) ====");
+	System.out.println("°Ë»öÇÏ·Á´Â °í°´¸í?");
 	String searchName = scanner.next();
 	int searchCount = bank.searchCountByName(searchName);
-	BankBook[] searchArr = new BankBook[searchCount];
+	BankBook[] searchArr = new BankBook[searchCount];//¹è¿­ÀÏ °æ¿ì¿¡´Â ÀÌ·¸°Ô ¹ŞÀ½
 	searchArr = bank.seaechAccountByName(searchName);
-	for (BankBook bankBook : searchArr) { // : inìœ¼ë¡œ ìƒê°
-		bankBook.showAccount();
+	for (BankBook bankBook : searchArr) { // : inÀ¸·Î »ı°¢
+		System.out.println(bankBook.showAccount());
 		
 	}
-	bank.seaechAccountByName(searchName);
-	System.out.println("ê²€ìƒ‰í•˜ë ¤ëŠ” ê³„ì¢Œë²ˆí˜¸?");
+
+	System.out.println("°Ë»öÇÏ·Á´Â °èÁÂ¹øÈ£?");
+	//°´Ã¼°¡ ¸Ş¼Òµå¸¦ È£ÃâÇÑ ÈÄ ¿¬»êÀ» ÅëÇØ °á°ú¸¦ ¸®ÅÏÇÏ¿´Áö¸¸
+	//±× ¸®ÅÏ°ªÀ» ¹Ş´Â º¯¼öÃ³¸®´Â °³¹ßÀÚ°¡ º°µµ·Î ÇØÁà¾ß ÇÑ´Ù.
+	// ±× ¹æ¹ıÀº ¸Ş¼Òµå°¡ ¸®ÅÏÇÏ´Â ¸®ÅÏÅ¸ÀÔÀ» ¾Ë¾Æ³»¼­
+	//±× Å¸ÀÔÀ¸·Î º¯¼öÇÏ³ª¸¦ ¸¸µç ´ÙÀ½ ±× º¯¼ö¿¡ ¸®ÅÏ°ªÀ» ÇÒ´çÇÑ´Ù.
+	BankBook bankBook = bank.searchAccountByAccountNo(scanner.nextInt()); //ÀÏ¹İÀûÀ¸·Î ¾Õ¿¡¼­´Â void Çü½ÄÀÌ¾ú±â ‹š¹®¿¡ ÀÌ·¸°Ô ¸¸µé ÇÊ¿ä°¡ ¾ø¾úÀ½
+	System.out.println(bankBook.showAccount());
+	System.out.println("»èÁ¦ÇÏ·Á´Â °èÁÂ¹øÈ£?");
+//	String delet = scanner.next(); //"12345" ¿Í 12345 ´Â ºñ±³°¡ ºÒ°¡
+	//int ¿Í StringÀÇ °ªÀ» ¼­·Î ºñ±³ÇÏ·Á¸é String Å¸ÀÔÀ» int·Î ¹Ù²ãÁà¾ß ÇÑ´Ù.
+	//int one = String.vlueOF("12345"); ÀÇ °á°ú°ªÀº 12345
+//	String deletAccount = String.valueOf(delet);
+	boolean CloseOk = bank.closeAcoount(scanner.next());
+	if (CloseOk==true) {
+		System.out.println("»èÁ¦µÇ¾ú½À´Ï´Ù.");
+	}else{
+		System.out.println("ÇØ´ç °èÁÂ°¡ ¾ø½À´Ï´Ù.");
+	}
 	
-	bank.searchAccountByAccountNo(scanner.nextInt()).showAccount();
-	
-}
+	}
 }

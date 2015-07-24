@@ -1,6 +1,6 @@
 package bank;
 /*
- 계좌 개설 기능
+ 계좌 개설 가능
  * */
 public interface BankRole {
 	public void openAccount(
@@ -12,21 +12,21 @@ public interface BankRole {
 
 	
 	/*
-	 계좌번호를 입력하면 계좌 내용이 출력된다
+	계좌번호를 입력하면 계좌 내용이 출력된다
 	 * */
 	
 	public abstract BankBook searchAccountByAccountNo(
 			int i
 			);
 	/*
-	 계좌주 이름을 입력하면 그 사람 소유의 계좌가 전부 검색(단, 동일인이 다수의 계좌를 가질 수 있다)
+	 계좌주 이름을 입력하면 그 사람 소유의 계좌가 전부 검색(단, 동일인이 다수의 계좌를 가질 수 있다.
 	 * */
 	
 	public BankBook[] seaechAccountByName(
 			String ownerName
 			);
 	/*
-	 계좌주 이름을 입력하면 그 사람 소유의 계좌 갯수를 알려줌
+	계좌주 이름을 입력하면 그 사람 소유의 계좌 갯수를 알려줌 
 	 * */
 	public int searchCountByName(
 			String name

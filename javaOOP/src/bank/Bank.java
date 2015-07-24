@@ -3,22 +3,22 @@ package bank;
 public class Bank implements BankRole {
 
 	// 필드
-	// 은행은 통장을 여러개를 관리한다/
-	// 따라서 필드에 인스턴스변수 하나를 지정하지 않고
-	// 여러개를 담을 수 있는 배열을 지정한다.
-	// 아래 배열은 은행에서 보면 계좌를 관리하는 DB
+		// 은행은 통장을 여러개를 관리한다/
+		// 따라서 필드에 인스턴스변수 하나를 지정하지 않고
+		// 여러개를 담을 수 있는 배열을 지정한다.
+		// 아래 배열은 은행에서 보면 계좌를 관리하는 DB
 	private BankBook[] bankBookList;
 	private int count;// 은행에서 관리하는 통장 갯수
 	// 생성자
-	// 배열,자료구조(컬렉션)을 보유하는
-	// 객체를 만들고자 할 때는 그 객체의 생성자에 배열,자료구조의 객체를 생성해준다.
+		// 배열,자료구조(컬렉션)을 보유하는
+		// 객체를 만들고자 할 때는 그 객체의 생성자에 배열,자료구조의 객체를 생성해준다.
 
 	public Bank(int count) {
 		bankBookList = new BankBook[count];
 	}
 
 	// 멤버메소드
-	// getter/ setter
+		// getter/ setter
 
 	public BankBook[] getBankBookList() {
 		return bankBookList;
@@ -37,9 +37,9 @@ public class Bank implements BankRole {
 	}
 
 	// 계좌계설
-	/*
-	 * 계좌번호, 계좌주, 비번, 잔액 만 입력하면 통장을 만들어 준다.
-	 */
+		/*
+		 * 계좌번호, 계좌주, 비번, 잔액 만 입력하면 통장을 만들어 준다.
+		 */
 	@Override
 	public void openAccount(String ownerName, int password, int restMoney) {
 		BankBook bankBook = (BankBook) new BankBook(ownerName);
@@ -53,8 +53,8 @@ public class Bank implements BankRole {
 
 	// 계좌검색 (계좌번호) -> 리턴결과 : 계좌 1개
 	@Override
-	public BankBook searchAccountByAccountNo(String accountNo) {
-		BankBook account = null;// 리턴 타입을 이런 형식으로 만들어줌
+	public BankBook searchAccountByAccountNo(String accountNo) {   //BankBook �̶�� ���� ŸĨ�� �����ϸ� null���̶�� �ʱⰪ�� �ְ� ���߿� �������ش�
+		BankBook account = null;// // ���� Ÿ���� �̷� �������� �������
 		// String -> int
 		int searchAccountNo = Integer.parseInt(accountNo);
 		for (int i = 0; i < this.count; i++) {
@@ -72,19 +72,27 @@ public class Bank implements BankRole {
 	// 계좌검색(이름) -> 리턴결과 : 계좌 여러개
 	@Override
 	public BankBook[] seaechAccountByName(String ownerName) {
-		BankBook[] accounts = null;
+	
 		// searchAccountByname()이 메소드를 호출하면 자동으로 Searchcountname()을 먼저 호출하라
 
 		int tempCount = this.searchCountByName(ownerName);
-		if (tempCount == 0) {// 조회하는 사람의 통장이 하나도 없다면
+		if (tempCount ==0) {
 			return null;
 		}
-		for (int i = 0; i < this.count; i++) {
+		//���⼭ tempCount�� ������ �ǹ��ϴ� ���̰�
+		
+		// ��ó�� ���͸��� �ϴ� ������ �� �˰����� Ÿ�� ���� �ʿ���� ���¶�� �˰����� ȣ������ �ʱ� ���ؼ���.
+		// �׷��� ������ �ڿ�(���ҽ� : �޸�, DB)�� ���� �ʷ��Ѵ�
+		BankBook[] accounts = new BankBook[tempCount];
+		
+		tempCount = 0; //0���� �ʱ�ȭ ���Ѽ� �迭�� �ε����� ����ؾ� ��
+		for (int i = 0; i < accounts.length; i++) {
 			if (bankBookList[i].getName().equals(ownerName)) {
 				accounts[tempCount] = bankBookList[i];
+				//���⼭ tempcount�� �迭�� ���� ����Ų�� ���� �� ������ 3���� �����ϸ� 3��° �迭 �� 4��° ���� ����Ų��
 				tempCount++;
 			}
-
+			
 		}
 
 		return accounts;
@@ -110,12 +118,18 @@ public class Bank implements BankRole {
 	@Override
 	public boolean closeAcoount(String accountNo) {
 		// flag는 삭제가 성공적으로 이뤄지면 true를 리턴하고 삭제할게 없으면 false리턴
-		boolean flag = false;
+		boolean CloseOk  = false;
 		// String(문자열)로 들어온 값을 숫자로 바꿔서 비교
+		BankBook bankBook = this.searchAccountByAccountNo(accountNo);
+		//���͸������� if-else ������ ������� �ʰ� if ���� ����Ѵ�.
+		if (bankBook == null) {
+			System.out.println("�ش� ���°� �������� �ʽ��ϴ�.");
+			return CloseOk;
+		}
 		int searAccountNO = Integer.parseInt(accountNo);
 		for (int i = 0; i < this.count; i++) {
 			if (bankBookList[i].getBankbookNo() == searAccountNO) {
-				flag = true;
+			
 				/*
 				 * j=i로 바꾼 이유는 홍길동의 계좌가 은행 전쳬계좌의 50번째 라면... 내부 for 문에서 다시 처음부터
 				 * 0부터 회전하지 않고 홍길동의 계좌가 있는 인덱스 번호부터 뒤에 있는 계좌번호를 덮어쓰는 방식으로 진행한 후
@@ -127,11 +141,13 @@ public class Bank implements BankRole {
 
 				}
 				count--;
+				// �� �˰����� Ŀģ �Ŀ��� ���� ������ �Ͼ�ٰ� ����.
+				CloseOk = true;
 			}
 
 		}
 
-		return flag;
+		return CloseOk;
 	}
 
 	@Override
